@@ -3,6 +3,7 @@ import DefaultLayout from "~/layouts/DefaultLayout/DefaultLayout";
 import EmptyLayout from "~/layouts/EmptyLayout/EmptyLayout";
 import AccountPage from "~/pages/AccountPage/AccountPage";
 import HomePage from "~/pages/HomePage/HomePage";
+import InstallPage from "~/pages/InstallPage/InstallPage";
 import InvestedDetailPage from "~/pages/InvestedDetailPage/InvestedDetailPage";
 import InvestedListPage from "~/pages/InvestedListPage/InvestedListPage";
 import LoginPage from "~/pages/LoginPage/LoginPage";
@@ -97,6 +98,13 @@ const routesConfig = [
     component: LoginPage,
     private: false,
   },
+  {
+    path: ROUTES.INSTALL,
+    name: "install",
+    layout: EmptyLayout,
+    component: InstallPage,
+    private: false,
+  }
 ];
 
 export default routesConfig;
