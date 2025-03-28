@@ -32,4 +32,5 @@ export const ROUTES = {
   CHOICE_CARD_BANK: "/choice-card-bank",
   ADD_CARD_BANK_SUCCESS: "/add-card-bank-success",
   DETAIL_NOTICE: "/detail-notice/:noticeId",
+  SUCCESS_PAGE: "/success-page",
 };

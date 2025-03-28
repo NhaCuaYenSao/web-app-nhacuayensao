@@ -5,11 +5,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { productApi } from "~/apis/ProductApi";
 import Header from "~/components/Header/Header";
 import { UpArrowIcon } from "~/components/Icons/Icons";
+import { ROUTES } from "~/constants/route-constant";
 import { formatNumber } from "~/utils/FormatCurrency";
 
 export default function InvestedDetailPage() {
   const {
-    user,
     token: { accessToken },
   } = useSelector((state) => state.auth);
 
@@ -32,7 +32,7 @@ export default function InvestedDetailPage() {
   return (
     <div>
       <Header title={"Nhà của yến sào"}></Header>
-      <div className="mt-14 pb-12">
+      <div className="mt-14">
         <section>
           <div
             className="pb-2"
@@ -148,7 +148,16 @@ export default function InvestedDetailPage() {
             >
               Rút gốc + lãi
             </SecondaryButton> */}
-            <Button size="large" shape="round" className="w-full">
+            <Button
+              size="large"
+              shape="round"
+              className="w-full"
+              onClick={() => {
+                navigate(ROUTES.WITHDRAW_INVEST.replace(":type", "FULL"), {
+                  state: { product: product },
+                });
+              }}
+            >
               Rút gốc + lãi
             </Button>
           </section>

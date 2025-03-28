@@ -6,17 +6,20 @@ import App from "./App.jsx";
 import GlobalStyle from "./components/GlobalStyle/GlobalStyle";
 import { store } from "./store.js";
 import { registerSW } from "virtual:pwa-register";
+import { ConfigProvider } from "antd";
 
 if ("serviceWorker" in navigator) {
   registerSW();
 }
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <Provider store={store}>
+  // <StrictMode>
+  <Provider store={store}>
+    <ConfigProvider>
       <GlobalStyle>
         <App />
       </GlobalStyle>
-    </Provider>
-  </StrictMode>
+    </ConfigProvider>
+  </Provider>
+  // </StrictMode>
 );

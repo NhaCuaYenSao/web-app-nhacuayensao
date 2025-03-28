@@ -1,19 +1,11 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import viteSvgr from "vite-plugin-svgr";
 import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react-swc";
+import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
-import mkcert from "vite-plugin-mkcert";
-import fs from "fs";
+import viteSvgr from "vite-plugin-svgr";
 
 // https://vite.dev/config/
 export default defineConfig({
-  server: {
-    https: {
-      key: fs.readFileSync("./127.0.0.1-key.pem"),
-      cert: fs.readFileSync("./127.0.0.1.pem"),
-    },
-  },
   plugins: [
     react(),
     // mkcert(),
