@@ -26,6 +26,11 @@ export const axiosNCYS = {
     const response = await request.delete(path, options);
     return response.data;
   },
+
+  async upload(path, data, options) {
+    const response = await request.post(path, data, {...options, headers: { "Content-Type": "multipart/form-data" }});
+    return response.data;
+  }
 };
 
 request.interceptors.request.use(

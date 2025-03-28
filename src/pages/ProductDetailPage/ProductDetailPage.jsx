@@ -1,4 +1,4 @@
-import { Button, Drawer, message } from "antd";
+import { Button, Drawer, message, Select } from "antd";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -16,6 +16,7 @@ export default function ProductDetailPage() {
   const [amount, setAmount] = useState("");
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [voucherId, setVoucherId] = useState("none");
 
   const [sheetVisible, setSheetVisible] = useState(false);
   const { projectId } = useParams();
@@ -55,7 +56,7 @@ export default function ProductDetailPage() {
     try {
       setLoading(true);
       //Call API here
-      await investmentApi.invest(accessToken, {
+      await investmentApi.invest(accessToken, voucherId, {
         productId: Number(projectId),
         amount: Number(reqAmount),
         cycleCount: Number(product.cycleDay),
@@ -200,7 +201,7 @@ export default function ProductDetailPage() {
 
         <section>
           <Drawer
-            height={500}
+            height={700}
             placement="bottom"
             closable={false}
             onClose={() => {
@@ -284,6 +285,29 @@ export default function ProductDetailPage() {
                     )}
                   </div>
                 </div>
+              </div>
+              <div className="mt-4 px-4">
+                <label htmlFor="" className="font-bold">
+                  Voucher
+                </label>
+                <Select
+                  size="large"
+                  className="w-full"
+                  defaultValue={voucherId}
+                  onChange={(data) => {
+                    setVoucherId(data);
+                  }}
+                  options={[
+                    {
+                      value: "none",
+                      label: "Không áp dụng voucher",
+                    },
+                    {
+                      value: "5",
+                      label: "7 Ngày kim yến",
+                    },
+                  ]}
+                />
               </div>
               <div className="mt-4">
                 <Button
