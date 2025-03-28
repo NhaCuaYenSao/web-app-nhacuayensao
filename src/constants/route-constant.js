@@ -35,5 +35,5 @@ export const ROUTES = {
   INSTALL:"/install",
   SUCCESS_PAGE: "/success-page",
   VOUCHER_LIST: "/voucher-list",
-  // VOUCHER_DETAIL: "/voucher-detail/:voucherId",
+  MY_VOUCHER: "/my-voucher",
 };

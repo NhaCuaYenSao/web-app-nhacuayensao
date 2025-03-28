@@ -3,7 +3,7 @@ import Header from "~/components/Header/Header";
 import { Button, message } from "antd";
 import { voucherApi } from "~/apis/VoucherApi";
 
-export default function VoucherPage() {
+export default function MyVoucherPage () {
   const [vouchers, setVouchers] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -23,23 +23,9 @@ export default function VoucherPage() {
     fetchVouchers();
   }, []);
 
-  const handleGetVoucher = async (id) => {
-    try {
-      await voucherApi.addVoucherAPI({ voucherId: id });
-      message.success("Nhận voucher thành công!");
-      setVouchers((prevVouchers) =>
-        prevVouchers.filter((voucher) => voucher.id !== id)
-      );
-    }
-    catch (error) {
-      console.error("Error adding voucher:", error);
-      message.error("Có lỗi xảy ra, vui lòng thử lại sau!");
-    }
-  };
-
   return (
     <div className="p-4">
-      <Header title="Danh sách Voucher"></Header>
+      <Header title="Danh sách Voucher của Tôi"></Header>
       <div className="mt-14">
         {vouchers.length > 0 ? (
           vouchers.map((voucher) => (
@@ -57,9 +43,6 @@ export default function VoucherPage() {
               <div className="flex-1">
                 <div className="text-lg mb-1 font-medium">{voucher.title}</div>
                 <div className="text-sm">{voucher.description}</div>
-                <div className="mt-4 flex justify-end">
-                  <Button onClick={() => handleGetVoucher(voucher.id)}>Nhận</Button>
-                </div>
               </div>
             </div>
           ))

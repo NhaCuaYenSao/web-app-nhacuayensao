@@ -15,8 +15,10 @@ import HomePage from "~/pages/HomePage/HomePage";
 import InstallPage from "~/pages/InstallPage/InstallPage";
 import InvestedDetailPage from "~/pages/InvestedDetailPage/InvestedDetailPage";
 import InvestedListPage from "~/pages/InvestedListPage/InvestedListPage";
+import KycPage from "~/pages/KycPage/KycPage";
 import LoginPage from "~/pages/LoginPage/LoginPage";
 import LoginSecurityPage from "~/pages/LoginSercurityPage/LoginSercurityPage";
+import MyVoucherPage from "~/pages/MyVoucherPage/MyVoucherPage";
 import NoticeDetailPage from "~/pages/NoticeDetailPage/NoticeDetailPage";
 import NoticePage from "~/pages/NoticePage/NoticePage";
 import OTPPage from "~/pages/OTPPage/OTPPage";
@@ -261,9 +263,23 @@ const routesConfig = [
   {
     path: ROUTES.VOUCHER_LIST,
     name: "voucher-list",
-    layout: EmptyLayout,
+    layout: DefaultLayout,
     component: VoucherPage,
-    // private: true,
+    private: true,
+  },
+  {
+    path: ROUTES.KYC_INFO,
+    name: "kyc-info",
+    layout: DefaultLayout,
+    component: KycPage,
+    private: true,
+  },
+  {
+    path: ROUTES.MY_VOUCHER,
+    name: "my-voucher",
+    layout: DefaultLayout,
+    component: MyVoucherPage,
+    private: true,
   }
 ];
 

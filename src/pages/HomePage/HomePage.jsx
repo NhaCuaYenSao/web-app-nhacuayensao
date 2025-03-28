@@ -6,7 +6,7 @@ import { configSystemApi } from "~/apis/ConfigSystemApi";
 import { productApi } from "~/apis/ProductApi";
 import { walletApi } from "~/apis/WalletApi";
 import CardProduct from "~/components/CardProduct/CardProduct";
-import { ChartIcon, DollarIcon } from "~/components/Icons/Icons";
+import { ChartIcon, DollarIcon, VoucherIcon } from "~/components/Icons/Icons";
 import Wallet from "~/components/Wallet/Wallet";
 import { ROUTES } from "~/constants/route-constant";
 import { setConfigSystem } from "~/features/SystemConfig/SystemConfigSlide";
@@ -133,7 +133,7 @@ export default function HomePage() {
               >
                 <DollarIcon></DollarIcon>
               </div>
-              <p className="text-center">Đầu tư của tôi</p>
+              <p className="text-center">Đầu tư<br/>của tôi</p>
             </Link>
           )}
 
@@ -156,7 +156,19 @@ export default function HomePage() {
             >
               <ChartIcon />
             </div>
-            <p className="text-center">Các dự án đầu tư</p>
+            <p className="text-center ">Các dự án<br/>đầu tư</p>
+          </Link>
+          <Link
+            to={ROUTES.VOUCHER_LIST}
+            className="flex flex-col items-center justify-center gap-1 w-1/4"
+          >
+            <div
+              className="w-[36px] h-[36px] flex items-center justify-center rounded"
+              style={{ boxShadow: "0px 2px 3.8px 0px rgba(0, 0, 0, 0.17)" }}
+            >
+              <VoucherIcon />
+            </div>
+            <p className="text-center">Voucher</p>
           </Link>
           <a
             target="_blank"
