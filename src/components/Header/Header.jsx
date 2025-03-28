@@ -12,7 +12,7 @@ export default function Header({ title = "NHÀ CỦA YẾN SÀO", isBack = true 
       <div
         className={`flex ${
           isBack ? "justify-between" : "justify-center"
-        } items-center py-1 px-2`}
+        } items-center py-3 px-2`}
         style={{ borderBottom: "1px solid #E5E7EB" }}
       >
         {isBack && (

@@ -29,4 +29,29 @@ export const authApi = {
     const res = await axiosNCYS.post("/auth/register", data);
     return res;
   },
+
+  async changePasswordApi(
+    accessToken,
+    data = {
+      oldPassword: "1234567",
+      newPassword: "123456",
+    }
+  ) {
+    const res = await axiosNCYS.post("/auth/change-password", data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return res;
+  },
+
+  async forgotPasswordApi(
+    data = {
+      email: "",
+      password: "",
+    }
+  ) {
+    const res = await axiosNCYS.post("/auth/forgot-password", data);
+    return res;
+  },
 };

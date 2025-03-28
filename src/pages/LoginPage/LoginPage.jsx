@@ -48,10 +48,6 @@ export default function LoginPage() {
     } catch (error) {
       if (error.response) {
         dispatch(loginFailure(error.response.data.message));
-        showToast({
-          message: error.response.data.message || "Đăng nhập thất bại",
-          type: "error",
-        });
         message.error("Đăng nhập thất bại");
       } else {
         dispatch(loginFailure("Đăng nhập thất bại"));

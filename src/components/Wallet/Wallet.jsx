@@ -46,20 +46,20 @@ export default function Wallet({ balance = 0, isLoading = false }) {
         </p> */}
       </div>
       <div className="flex items-center justify-between gap-3">
-        {/* <Link
+        <Link
           to={ROUTES.DEPOSIT}
           className="w-1/2 flex items-center justify-center gap-2 bg-[#20695E] p-4 rounded-full text-white text-base font-bold"
         >
           <AirplaneIcon />
           <span>Nạp tiền</span>
-        </Link> */}
-        <button
+        </Link>
+        {/* <button
           onClick={handleCreateOrder}
           className="w-1/2 flex items-center justify-center gap-2 bg-[#20695E] p-4 rounded-full text-white text-base font-bold"
         >
           <AirplaneIcon />
           <span>Nạp tiền</span>
-        </button>
+        </button> */}
         <Link
           to={ROUTES.WITHDRAW}
           className="w-1/2 flex items-center justify-center gap-2 bg-white p-4 rounded-full text-black text-base font-bold"

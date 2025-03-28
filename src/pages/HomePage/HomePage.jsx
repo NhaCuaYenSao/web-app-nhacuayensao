@@ -10,7 +10,6 @@ import { ChartIcon, DollarIcon } from "~/components/Icons/Icons";
 import Wallet from "~/components/Wallet/Wallet";
 import { ROUTES } from "~/constants/route-constant";
 import { setConfigSystem } from "~/features/SystemConfig/SystemConfigSlide";
-import { redirectToDeviceBrowser } from "~/utils/RedirectToDeviceBrowser";
 
 export default function HomePage() {
   const {

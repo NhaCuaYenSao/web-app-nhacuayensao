@@ -24,7 +24,7 @@ export default function InvestedListPage() {
   return (
     <div>
       <Header title="Dự án đã đầu tư" />
-      <div className="mt-14 px-4">
+      <div className="mt-14">
         <div className="flex flex-col gap-4">
           {!products.length ? (
             <>

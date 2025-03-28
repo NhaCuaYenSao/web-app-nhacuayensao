@@ -4,8 +4,8 @@ export default function TermPage() {
   return (
     <div>
       <Header title="Điều khoản và dịch vụ"></Header>
-      <div className="mt-8">
-        <p className="px-4">
+      <div className="mt-14">
+        <p className="">
           Ứng dụng này tôn trọng và bảo vệ quyền riêng tư cá nhân của tất cả
           người dùng sử dụng dịch vụ. Để cung cấp cho bạn các dịch vụ chính xác
           hơn và được cá nhân hóa, ứng dụng này sẽ sử dụng và tiết lộ thông tin

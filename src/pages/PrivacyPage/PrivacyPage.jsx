@@ -4,8 +4,8 @@ export default function PrivacyPage() {
   return (
     <div>
       <Header title="Chính sách bảo mật"></Header>
-      <div className="mt-8">
-        <p className="px-4">
+      <div className="mt-14">
+        <p className="">
           Quy tắc ứng xử của người dùng 1. Người dùng không được sử dụng thông
           tin nhận dạng sai khi đăng ký trên trang web này. Người dùng nên giữ
           thông tin tài khoản và mật khẩu của họ đúng cách, và người dùng phải

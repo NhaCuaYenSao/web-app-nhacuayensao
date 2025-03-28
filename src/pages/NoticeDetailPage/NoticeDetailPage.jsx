@@ -24,8 +24,8 @@ export default function NoticeDetailPage() {
   return (
     <div>
       <Header title={notice?.title || "Chi tiết thông báo"}></Header>
-      <div className="mt-4">
-        <section className="px-4">
+      <div className="mt-14">
+        <section className="">
           <p className="text-xl font-bold">{notice?.title}</p>
           <p className="font-bold mb-8 text-gray-500 text-xs">
             Thông báo lúc: {dayjs(notice?.createdAt).format("DD/MM/YYYY HH:mm")}

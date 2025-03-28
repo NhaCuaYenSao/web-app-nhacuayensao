@@ -33,4 +33,5 @@ export const ROUTES = {
   ADD_CARD_BANK_SUCCESS: "/add-card-bank-success",
   DETAIL_NOTICE: "/detail-notice/:noticeId",
   INSTALL:"/install",
+  SUCCESS_PAGE: "/success-page",
 };
