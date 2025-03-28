@@ -34,4 +34,6 @@ export const ROUTES = {
   DETAIL_NOTICE: "/detail-notice/:noticeId",
   INSTALL:"/install",
   SUCCESS_PAGE: "/success-page",
+  VOUCHER_LIST: "/voucher-list",
+  // VOUCHER_DETAIL: "/voucher-detail/:voucherId",
 };

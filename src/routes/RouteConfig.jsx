@@ -28,6 +28,7 @@ import ResetPassword from "~/pages/ResetPassword/ResetPassword";
 import SettingPaymentMethod from "~/pages/SettingPaymentMethodPage/SettingPaymentMethodPage";
 import SuccessPage from "~/pages/SuccessPage/SuccessPage";
 import TermPage from "~/pages/TermPage/TermPage";
+import VoucherPage from "~/pages/VoucherPage/VoucherPage";
 import WithdrawInvestPage from "~/pages/WithdrawInvestedPage/WithdrawInvestedPage";
 import WithdrawPage from "~/pages/WithdrawPage/WithdrawPage";
 
@@ -256,6 +257,13 @@ const routesConfig = [
     layout: EmptyLayout,
     component: RegisterPage,
     private: false,
+  },
+  {
+    path: ROUTES.VOUCHER_LIST,
+    name: "voucher-list",
+    layout: EmptyLayout,
+    component: VoucherPage,
+    // private: true,
   }
 ];
 
