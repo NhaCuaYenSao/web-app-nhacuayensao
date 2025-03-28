@@ -21,5 +21,11 @@ export const voucherApi = {
     const res = await axiosNCYS.post(`${NAME_API}/add-to-wallet`, data);
 
     return res;
+  },
+
+  async getVoucherByUserAPI() {
+    const res = await axiosNCYS.get(`${NAME_API}/by-user`);
+
+    return res;
   }
 }

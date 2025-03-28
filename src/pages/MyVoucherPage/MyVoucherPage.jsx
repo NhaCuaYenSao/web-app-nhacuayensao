@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Header from "~/components/Header/Header";
-import { Button, message } from "antd";
+import { message } from "antd";
 import { voucherApi } from "~/apis/VoucherApi";
 
 export default function MyVoucherPage () {
-  const [vouchers, setVouchers] = useState([]);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchVouchers = async () => {
     try {
-      const { data } = await voucherApi.getAllVouchersAPI();
+      const { data } = await voucherApi.getVoucherByUserAPI();
 
-      setVouchers(data);
+      setData(data);
     } catch (error) {
+      message.error("Có lỗi xảy ra khi tải danh sách voucher!");
       console.error("Error fetching vouchers:", error);
     } finally {
       setLoading(false);
@@ -27,22 +28,22 @@ export default function MyVoucherPage () {
     <div className="p-4">
       <Header title="Danh sách Voucher của Tôi"></Header>
       <div className="mt-14">
-        {vouchers.length > 0 ? (
-          vouchers.map((voucher) => (
+        {data.length > 0 ? (
+          data.map((item) => (
             <div
-              key={voucher.id}
-              className="box-border p-4 rounded-xl flex items-center justify-center shadow-md mb-4"
+              key={item.voucher.id}
+              className="box-border p-4 rounded-xl flex justify-center shadow-md mb-4"
             >
               <div className="flex-shrink-0 mr-4 flex items-center">
                 <img
-                  src={voucher.thumbnail}
+                  src={item.voucher.thumbnail}
                   alt="Voucher"
                   className="w-24 h-24"
                 />
               </div>
               <div className="flex-1">
-                <div className="text-lg mb-1 font-medium">{voucher.title}</div>
-                <div className="text-sm">{voucher.description}</div>
+                <div className="text-lg mb-1 font-medium">{item.voucher.title}</div>
+                <div className="text-sm">{item.voucher.description}</div>
               </div>
             </div>
           ))
