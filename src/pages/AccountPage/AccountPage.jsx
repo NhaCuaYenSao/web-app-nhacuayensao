@@ -8,6 +8,7 @@ import {
   DollarFillIcon,
   ExportIcon,
   UserIcon,
+  VoucherFillIcon,
 } from "~/components/Icons/Icons";
 import Wallet from "~/components/Wallet/Wallet";
 import { ROUTES } from "~/constants/route-constant";
@@ -107,6 +108,17 @@ export default function AccountPage() {
           <div className="flex items-center gap-6">
             <DollarFillIcon />
             <span className="text-base">Đầu tư của tôi</span>
+          </div>
+          <ArrowRightFill color={"#616161"} />
+        </Link>
+        <Link
+          to={ROUTES.MY_VOUCHER}
+          className="w-full flex items-center justify-between p-4 pr-6 rounded-full"
+          style={{ boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.08)" }}
+        >
+          <div className="flex items-center gap-6">
+            <VoucherFillIcon />
+            <span className="text-base">Voucher của tôi</span>
           </div>
           <ArrowRightFill color={"#616161"} />
         </Link>

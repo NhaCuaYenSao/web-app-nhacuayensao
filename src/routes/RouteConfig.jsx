@@ -12,10 +12,13 @@ import DepositPage from "~/pages/DepositPage/DepositPage";
 import DepositSuccessPage from "~/pages/DepositSuccessPage/DepositSuccessPage";
 import ForgotPassword from "~/pages/ForgotPassword/ForgotPassword";
 import HomePage from "~/pages/HomePage/HomePage";
+import InstallPage from "~/pages/InstallPage/InstallPage";
 import InvestedDetailPage from "~/pages/InvestedDetailPage/InvestedDetailPage";
 import InvestedListPage from "~/pages/InvestedListPage/InvestedListPage";
+import KycPage from "~/pages/KycPage/KycPage";
 import LoginPage from "~/pages/LoginPage/LoginPage";
 import LoginSecurityPage from "~/pages/LoginSercurityPage/LoginSercurityPage";
+import MyVoucherPage from "~/pages/MyVoucherPage/MyVoucherPage";
 import NoticeDetailPage from "~/pages/NoticeDetailPage/NoticeDetailPage";
 import NoticePage from "~/pages/NoticePage/NoticePage";
 import OTPPage from "~/pages/OTPPage/OTPPage";
@@ -27,6 +30,7 @@ import ResetPassword from "~/pages/ResetPassword/ResetPassword";
 import SettingPaymentMethod from "~/pages/SettingPaymentMethodPage/SettingPaymentMethodPage";
 import SuccessPage from "~/pages/SuccessPage/SuccessPage";
 import TermPage from "~/pages/TermPage/TermPage";
+import VoucherPage from "~/pages/VoucherPage/VoucherPage";
 import WithdrawInvestPage from "~/pages/WithdrawInvestedPage/WithdrawInvestedPage";
 import WithdrawPage from "~/pages/WithdrawPage/WithdrawPage";
 
@@ -243,12 +247,40 @@ const routesConfig = [
     private: false,
   },
   {
+    path: ROUTES.INSTALL,
+    name: "install",
+    layout: EmptyLayout,
+    component: InstallPage,
+    private: false,
+  },
+  {
     path: ROUTES.REGISTER,
     name: "register",
     layout: EmptyLayout,
     component: RegisterPage,
     private: false,
   },
+  {
+    path: ROUTES.VOUCHER_LIST,
+    name: "voucher-list",
+    layout: DefaultLayout,
+    component: VoucherPage,
+    private: true,
+  },
+  {
+    path: ROUTES.KYC_INFO,
+    name: "kyc-info",
+    layout: DefaultLayout,
+    component: KycPage,
+    private: true,
+  },
+  {
+    path: ROUTES.MY_VOUCHER,
+    name: "my-voucher",
+    layout: DefaultLayout,
+    component: MyVoucherPage,
+    private: true,
+  }
 ];
 
 export default routesConfig;

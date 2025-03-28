@@ -12,3 +12,15 @@ body {
 input {
   outline: none !important;
 }
+
+.slick-slide div {
+  outline: none !important;
+}
+
+.install-carousel .slick-prev:after, .install-carousel .slick-next:after {
+  color: #000 !important;
+  width: 16px;
+  height: 16px;
+  border-inline-start-width: 3px;
+  border-block-start-width: 3px;
+}
