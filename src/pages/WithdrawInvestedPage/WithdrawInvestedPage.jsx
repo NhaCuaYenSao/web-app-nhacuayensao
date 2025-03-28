@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { investmentApi } from "~/apis/InvestmentApi";
 import Header from "~/components/Header/Header";
+import { ROUTES } from "~/constants/route-constant";
 import { formatNumber } from "~/utils/FormatCurrency";
 
 export default function WithdrawInvestPage() {
@@ -52,7 +53,9 @@ export default function WithdrawInvestPage() {
           <div className="flex justify-between items-center w-full">
             <p>Số tiền đầu tư</p>
             <p>
-              <span>{formatNumber(Number(productFromState?.amount))}</span>{" "}
+              <span>
+                {formatNumber(Number(productFromState?.remainingAmount))}
+              </span>{" "}
               <span>VNĐ</span>
             </p>
           </div>
@@ -71,7 +74,7 @@ export default function WithdrawInvestPage() {
               <p>
                 <span>
                   {formatNumber(
-                    Number(productFromState?.amount) +
+                    Number(productFromState?.remainingAmount) +
                       Number(productFromState?.rateAmount)
                   )}
                 </span>{" "}
@@ -93,9 +96,9 @@ export default function WithdrawInvestPage() {
                 {type === "FULL"
                   ? formatNumber(
                       Number(
-                        Number(productFromState?.amount) +
+                        Number(productFromState?.remainingAmount) +
                           productFromState?.rateAmount -
-                          (Number(productFromState?.amount) +
+                          (Number(productFromState?.remainingAmount) +
                             productFromState?.rateAmount) *
                             (productFromState?.withdrawalFee / 100)
                       )

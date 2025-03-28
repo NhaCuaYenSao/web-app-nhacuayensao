@@ -77,7 +77,9 @@ export default function InvestedDetailPage() {
             <div>
               <p className="font-bold text-base text-black">Số tiền đầu tư</p>
               <p className="mt-5">
-                <span>{formatNumber(parseFloat(product?.amount))}</span>{" "}
+                <span>
+                  {formatNumber(parseFloat(product?.remainingAmount))}
+                </span>{" "}
                 <span>VNĐ</span>
               </p>
             </div>
