@@ -3,8 +3,16 @@ import { axiosNCYS } from "../configs/AxiosNCYS";
 const API_NAME = "investment";
 
 export const investmentApi = {
-  async invest(accessToken, data = { productId, amount, cycleCount }) {
-    const res = await axiosNCYS.post(`/${API_NAME}/invest`, data, {
+  async invest(
+    accessToken,
+    voucherId,
+    data = { productId, amount, cycleCount }
+  ) {
+    let path = `/${API_NAME}/invest`;
+    if (voucherId !== "none") {
+      path += `?voucherId=${voucherId}`;
+    }
+    const res = await axiosNCYS.post(path, data, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
