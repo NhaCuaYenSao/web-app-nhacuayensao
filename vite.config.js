@@ -7,7 +7,11 @@ import viteSvgr from "vite-plugin-svgr";
 // https://vite.dev/config/
 export default defineConfig({
   server: {
-    allowedHosts: ["localappnhacuayensao.com", "app.nhacuayensao.com"],
+    allowedHosts: [
+      "localappnhacuayensao.com",
+      "app.nhacuayensao.com",
+      "nhacuayensao.com",
+    ],
   },
   plugins: [
     react(),
