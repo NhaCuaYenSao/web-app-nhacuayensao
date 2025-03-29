@@ -54,4 +54,13 @@ export const authApi = {
     const res = await axiosNCYS.post("/auth/forgot-password", data);
     return res;
   },
+
+  async saveKycApi(accessToken, data) {
+    const res = await axiosNCYS.post("auth/save-kyc", data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return res;
+  },
 };

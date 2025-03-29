@@ -1,22 +1,65 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Form, Input, Switch, Button, Upload, message } from "antd";
-import { use, useEffect, useState } from "react";
-import { uploadApi } from "~/apis/UploadApi";
+import { Button, DatePicker, Form, Input, message, Switch, Upload } from "antd";
+import dayjs from "dayjs";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { authApi } from "~/apis/AuthApi";
 import Header from "~/components/Header/Header";
 
-const extractFileName = (url) => {
-  if (!url) return "";
-  const parts = url.split("/");
-  const lastPart = parts[parts.length - 1];
-  return lastPart.split("?")[0];
-};
-
 export default function KycPage() {
+  const {
+    user: { phoneNumber },
+    token: { accessToken },
+  } = useSelector((state) => state.auth);
+
   const [form] = Form.useForm();
   const [loadingUpload, setLoadingUpload] = useState(false);
 
   const handleSubmit = async (values) => {
-    console.log(values);
+    // const thumbnails = values.thumbnails.map((file) => file.response.data.url);
+    // console.log(thumbnails);
+    const frontIdentityCard = values.frontIdentityCard[0].response.data.url;
+    const backIdentityCard = values.backIdentityCard[0].response.data.url;
+    const selfieIdentityCard = values.selfieIdentityCard[0].response.data.url;
+    const gender = values.gender ? false : true;
+    const birthDate = dayjs(values.birthDate).format("DD/MM/YYYY");
+    const data = {
+      ...values,
+      frontIdentityCard,
+      backIdentityCard,
+      selfieIdentityCard,
+      gender,
+      birthDate,
+      phoneNumber,
+    };
+
+    // console.log(data);
+    setLoadingUpload(true);
+    try {
+      await authApi.saveKycApi(accessToken, data);
+      message.success("Gửi yêu cầu xác minh thành công!");
+    } catch (error) {
+      console.log(error);
+      message.error("Có lỗi xảy ra, vui lòng thử lại sau!");
+    } finally {
+      setLoadingUpload(false);
+    }
+    // console.log(values);
+  };
+
+  const validateFile = (_, fileList = []) => {
+    if (fileList.length === 0) {
+      return Promise.reject("Vui lòng tải lên ít nhất một tệp");
+    }
+    // if (fileList.length < 3 || fileList.length > 3) {
+    //   return Promise.reject("Vui lòng tải lên 3 tệp theo yêu cầu!!!");
+    // }
+    const file = fileList[0];
+    const isImage = file.type === "image/jpeg" || file.type === "image/png";
+    if (!isImage) {
+      return Promise.reject("Chỉ chấp nhận tệp ảnh (JPEG/PNG)");
+    }
+    return Promise.resolve();
   };
 
   return (
@@ -41,7 +84,7 @@ export default function KycPage() {
                   <Input placeholder="Nhập họ và tên" />
                 </Form.Item>
                 <Form.Item label="Giới tính" name="gender">
-                  <Switch checkedChildren="Nữ" unCheckedChildren="Nam" />
+                  <Switch checkedChildren="Nam" unCheckedChildren="Nữ" />
                 </Form.Item>
                 <Form.Item
                   label="Ngày sinh"
@@ -50,7 +93,17 @@ export default function KycPage() {
                     { required: true, message: "Vui lòng nhập ngày sinh" },
                   ]}
                 >
-                  <Input placeholder="Nhập ngày sinh" />
+                  {/* <Input placeholder="Nhập ngày sinh" /> */}
+                  <DatePicker className="w-full" format="DD/MM/YYYY" />
+                </Form.Item>
+                <Form.Item
+                  label="Quốc tịch"
+                  name="nationality"
+                  rules={[
+                    { required: true, message: "Vui lòng nhập quốc tịch" },
+                  ]}
+                >
+                  <Input placeholder="Nhập quốc tịch của bạn" />
                 </Form.Item>
                 <Form.Item
                   label="Số CCCD/CMND/Hộ chiếu"
@@ -76,26 +129,60 @@ export default function KycPage() {
                     Tải giấy tờ xác minh của bạn
                   </h2>
                   <div>
-                    <p className="text-sm mb-3">
-                      Vui lòng tải lên giấy tờ xác minh của bạn (Mặt trước và
-                      mặt sau CCCD/CMND/Hộ chiếu, 1 hình có mặt bạn).
-                    </p>
+                    <p className="text-sm mb-3">CCCD mặt trước</p>
                     <Form.Item
-                      name="thumbnails"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Vui lòng tải lên giấy tờ xác minh",
-                        },
-                      ]}
+                      name="frontIdentityCard"
+                      valuePropName="fileList"
+                      getValueFromEvent={({ fileList }) => fileList}
+                      rules={[{ validator: validateFile }]}
                     >
                       <Upload
+                        name="file"
+                        action="http://localhost:3001/api/v1/cloud/upload"
                         listType="picture"
-                        maxCount={3}
+                        maxCount={1}
                       >
-                        <Button type="primary" icon={<UploadOutlined />}>
-                          Upload
-                        </Button>
+                        <Button icon={<UploadOutlined />}>Tải lên</Button>
+                      </Upload>
+                    </Form.Item>
+                  </div>
+                </Form.Item>
+                <Form.Item>
+                  <div>
+                    <p className="text-sm mb-3">CCCD mặt sau</p>
+                    <Form.Item
+                      name="backIdentityCard"
+                      valuePropName="fileList"
+                      getValueFromEvent={({ fileList }) => fileList}
+                      rules={[{ validator: validateFile }]}
+                    >
+                      <Upload
+                        name="file"
+                        action="http://localhost:3001/api/v1/cloud/upload"
+                        listType="picture"
+                        maxCount={1}
+                      >
+                        <Button icon={<UploadOutlined />}>Tải lên</Button>
+                      </Upload>
+                    </Form.Item>
+                  </div>
+                </Form.Item>
+                <Form.Item>
+                  <div>
+                    <p className="text-sm mb-3">Ảnh mặt của bạn</p>
+                    <Form.Item
+                      name="selfieIdentityCard"
+                      valuePropName="fileList"
+                      getValueFromEvent={({ fileList }) => fileList}
+                      rules={[{ validator: validateFile }]}
+                    >
+                      <Upload
+                        name="file"
+                        action="http://localhost:3001/api/v1/cloud/upload"
+                        listType="picture"
+                        maxCount={1}
+                      >
+                        <Button icon={<UploadOutlined />}>Tải lên</Button>
                       </Upload>
                     </Form.Item>
                   </div>

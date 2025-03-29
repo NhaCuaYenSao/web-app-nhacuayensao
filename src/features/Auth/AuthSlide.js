@@ -39,9 +39,12 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
+    setKycStatus: (state, action) => {
+      state.user.kycStatus = action.payload.kycStatus;
+    },
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure, logout } =
+export const { loginStart, loginSuccess, loginFailure, logout, setKycStatus } =
   authSlice.actions;
 export default authSlice.reducer;

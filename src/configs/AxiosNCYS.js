@@ -1,14 +1,12 @@
 import axios from "axios";
 import { ENV } from "~/constants/env";
 import { localStoreTokenService } from "~/utils/LocalStoreTokenService";
-import { refreshTokenAPI } from "./AxiosRefresh";
 import { jwtDecode } from "jwt-decode";
+import { axiosJWT } from "./AxiosJWT";
 
 const request = axios.create({
   baseURL: ENV.API_NCYS,
-  headers: {
-    "ngrok-skip-browser-warning": "true",
-  },
+  withCredentials: true,
 });
 
 export const axiosNCYS = {
@@ -28,16 +26,18 @@ export const axiosNCYS = {
   },
 
   async upload(path, data, options) {
-    const response = await request.post(path, data, {...options, headers: { "Content-Type": "multipart/form-data" }});
+    const response = await request.post(path, data, {
+      ...options,
+      headers: { "Content-Type": "multipart/form-data" },
+    });
     return response.data;
-  }
+  },
 };
 
 request.interceptors.request.use(
   async (config) => {
     try {
       const accessToken = localStoreTokenService.getAccessToken();
-
       // Thêm token vào header nếu có
       if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`;
@@ -47,17 +47,13 @@ request.interceptors.request.use(
         const isExpired = decoded.exp < date.getTime() / 1000;
 
         if (isExpired) {
-          const refreshToken = localStoreTokenService.getRefreshToken();
-          if (!refreshToken) throw new Error("No refresh token found");
-
-          const res = await refreshTokenAPI(Number(decoded.sub), refreshToken);
+          const res = await axiosJWT.refreshTokenAPI(Number(decoded.sub));
           const resAccessToken = res.data.token.accessToken;
           const resRefreshToken = res.data.token.refreshToken;
 
           if (resAccessToken && resRefreshToken) {
             // Lưu token mới
             localStoreTokenService.setAccessToken(resAccessToken);
-            localStoreTokenService.setRefreshToken(resRefreshToken);
 
             // Cập nhật header với token mới
             config.headers.Authorization = `Bearer ${resAccessToken}`;
@@ -70,7 +66,6 @@ request.interceptors.request.use(
       console.error("Refresh token error:", error);
       // Clear tokens nếu có lỗi
       localStoreTokenService.setAccessToken(null);
-      localStoreTokenService.setRefreshToken(null);
       return Promise.reject(error);
     }
   },
